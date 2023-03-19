@@ -7,6 +7,30 @@ Created on Sun Mar 19 18:42:44 2023
 import numpy as np
 
 def RecadrePyr(Base):
+	"""
+	Function to create a copy of the input array and adding a 0-padding to
+	each side (columns) of it.
+
+	Parameters
+	----------
+	Base : numpy.ndarray
+		The 2-dimensionals numpy.ndarry to be copyed and padded
+	Returns
+	-------
+	Copy : numpy.ndarray
+		The 0-padded copy of the input array.
+
+	Exemple
+	-------
+	In [0] : _ = np.ones((5, 5))
+	In [1] : RecadrePyr(_)
+	Out [2] : array([[0, 1, 1, 1, 1, 1, 0],
+					 [0, 1, 1, 1, 1, 1, 0],
+					 [0, 1, 1, 1, 1, 1, 0],
+					 [0, 1, 1, 1, 1, 1, 0],
+					 [0, 1, 1, 1, 1, 1, 0]])
+
+	"""
 	Copy = np.zeros((Base.shape[0], Base.shape[1]+2))
 	Copy[:, 1:-1] = Base
 	return Copy

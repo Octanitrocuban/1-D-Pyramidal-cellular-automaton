@@ -21,8 +21,8 @@ Here are some exemple of what you can have with different rules.
 ![Exemple picture](rule42_sz601_simp.png)
 ![Exemple picture](rule42_sz601_sum.png)
 
-![Exemple picture](rule56_sz601_simp.png)
-![Exemple picture](rule56_sz601_sum.png)
+![Exemple picture](rule46_sz601_simp.png)
+![Exemple picture](rule46_sz601_sum.png)
 
 ![Exemple picture](rule52_sz601_simp.png)
 ![Exemple picture](rule52_sz601_sum.png)

@@ -78,8 +78,8 @@ Here are some exemple of what you can have with different rules.
 ![Exemple picture](img/rule203_sz601_simp.png)
 ![Exemple picture](img/rule203_sz601_sum.png)
 
-![Exemple picture](rule204_sz601_simp.png)
-![Exemple picture](rule204_sz601_sum.png)
+![Exemple picture](img/rule204_sz601_simp.png)
+![Exemple picture](img/rule204_sz601_sum.png)
 
-![Exemple picture](rule226_sz601_simp.png)
-![Exemple picture](rule226_sz601_sum.png)
+![Exemple picture](img/rule226_sz601_simp.png)
+![Exemple picture](img/rule226_sz601_sum.png)

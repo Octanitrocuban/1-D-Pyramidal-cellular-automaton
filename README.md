@@ -33,50 +33,50 @@ Here are some exemple of what you can have with different rules.
 ![Exemple picture](img/rule55_sz601_simp.png)
 ![Exemple picture](img/rule55_sz601_sum.png)
 
-![Exemple picture](rule101_sz601_simp.png)
-![Exemple picture](rule101_sz601_sum.png)
+![Exemple picture](img/rule101_sz601_simp.png)
+![Exemple picture](img/rule101_sz601_sum.png)
 
-![Exemple picture](rule102_sz601_simp.png)
-![Exemple picture](rule102_sz601_sum.png)
+![Exemple picture](img/rule102_sz601_simp.png)
+![Exemple picture](img/rule102_sz601_sum.png)
 
-![Exemple picture](rule107_sz601_simp.png)
-![Exemple picture](rule107_sz601_sum.png)
+![Exemple picture](img/rule107_sz601_simp.png)
+![Exemple picture](img/rule107_sz601_sum.png)
 
-![Exemple picture](rule108_sz601_simp.png)
-![Exemple picture](rule108_sz601_sum.png)
+![Exemple picture](img/rule108_sz601_simp.png)
+![Exemple picture](img/rule108_sz601_sum.png)
 
-![Exemple picture](rule112_sz601_simp.png)
-![Exemple picture](rule112_sz601_sum.png)
+![Exemple picture](img/rule112_sz601_simp.png)
+![Exemple picture](img/rule112_sz601_sum.png)
 
-![Exemple picture](rule118_sz601_simp.png)
-![Exemple picture](rule118_sz601_sum.png)
+![Exemple picture](img/rule118_sz601_simp.png)
+![Exemple picture](img/rule118_sz601_sum.png)
 
-![Exemple picture](rule121_sz601_simp.png)
-![Exemple picture](rule121_sz601_sum.png)
+![Exemple picture](img/rule121_sz601_simp.png)
+![Exemple picture](img/rule121_sz601_sum.png)
 
-![Exemple picture](rule122_sz601_simp.png)
-![Exemple picture](rule122_sz601_sum.png)
+![Exemple picture](img/rule122_sz601_simp.png)
+![Exemple picture](img/rule122_sz601_sum.png)
 
-![Exemple picture](rule134_sz601_simp.png)
-![Exemple picture](rule134_sz601_sum.png)
+![Exemple picture](img/rule134_sz601_simp.png)
+![Exemple picture](img/rule134_sz601_sum.png)
 
-![Exemple picture](rule138_sz601_simp.png)
-![Exemple picture](rule138_sz601_sum.png)
+![Exemple picture](img/rule138_sz601_simp.png)
+![Exemple picture](img/rule138_sz601_sum.png)
 
-![Exemple picture](rule178_sz601_simp.png)
-![Exemple picture](rule178_sz601_sum.png)
+![Exemple picture](img/rule178_sz601_simp.png)
+![Exemple picture](img/rule178_sz601_sum.png)
 
-![Exemple picture](rule182_sz601_simp.png)
-![Exemple picture](rule182_sz601_sum.png)
+![Exemple picture](img/rule182_sz601_simp.png)
+![Exemple picture](img/rule182_sz601_sum.png)
 
-![Exemple picture](rule198_sz601_simp.png)
-![Exemple picture](rule198_sz601_sum.png)
+![Exemple picture](img/rule198_sz601_simp.png)
+![Exemple picture](img/rule198_sz601_sum.png)
 
-![Exemple picture](rule201_sz601_simp.png)
-![Exemple picture](rule201_sz601_sum.png)
+![Exemple picture](img/rule201_sz601_simp.png)
+![Exemple picture](img/rule201_sz601_sum.png)
 
-![Exemple picture](rule203_sz601_simp.png)
-![Exemple picture](rule203_sz601_sum.png)
+![Exemple picture](img/rule203_sz601_simp.png)
+![Exemple picture](img/rule203_sz601_sum.png)
 
 ![Exemple picture](rule204_sz601_simp.png)
 ![Exemple picture](rule204_sz601_sum.png)

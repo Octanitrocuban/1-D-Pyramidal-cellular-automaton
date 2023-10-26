@@ -12,26 +12,26 @@ The list of script and their purpose:
 
 Here are some exemple of what you can have with different rules.
 
-![Exemple picture](rule15_sz601_simp.png)
-![Exemple picture](rule15_sz601_sum.png)
+![Exemple picture](img/rule15_sz601_simp.png)
+![Exemple picture](img/rule15_sz601_sum.png)
 
-![Exemple picture](rule41_sz601_simp.png)
-![Exemple picture](rule41_sz601_sum.png)
+![Exemple picture](img/rule41_sz601_simp.png)
+![Exemple picture](img/rule41_sz601_sum.png)
 
-![Exemple picture](rule42_sz601_simp.png)
-![Exemple picture](rule42_sz601_sum.png)
+![Exemple picture](img/rule42_sz601_simp.png)
+![Exemple picture](img/rule42_sz601_sum.png)
 
-![Exemple picture](rule46_sz601_simp.png)
-![Exemple picture](rule46_sz601_sum.png)
+![Exemple picture](img/rule46_sz601_simp.png)
+![Exemple picture](img/rule46_sz601_sum.png)
 
-![Exemple picture](rule52_sz601_simp.png)
-![Exemple picture](rule52_sz601_sum.png)
+![Exemple picture](img/rule52_sz601_simp.png)
+![Exemple picture](img/rule52_sz601_sum.png)
 
-![Exemple picture](rule53_sz601_simp.png)
-![Exemple picture](rule53_sz601_sum.png)
+![Exemple picture](img/rule53_sz601_simp.png)
+![Exemple picture](img/rule53_sz601_sum.png)
 
-![Exemple picture](rule55_sz601_simp.png)
-![Exemple picture](rule55_sz601_sum.png)
+![Exemple picture](img/rule55_sz601_simp.png)
+![Exemple picture](img/rule55_sz601_sum.png)
 
 ![Exemple picture](rule101_sz601_simp.png)
 ![Exemple picture](rule101_sz601_sum.png)

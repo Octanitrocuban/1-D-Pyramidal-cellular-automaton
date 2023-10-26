@@ -1,1136 +1,1137 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Mar 19 19:32:27 2023
-
 @author: Matthieu Nougaret
+
+This module contain the function to use from 20 to 39-th rule.
 """
 import numpy as np
-
-def RecadrePyr(Base):
+#=============================================================================
+def recadre_pyr(board):
 	"""
 	Function to create a copy of the input array and adding a 0-padding to
 	each side (columns) of it.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The 2-dimensionals numpy.ndarry to be copyed and padded
+
 	Returns
 	-------
-	Copy : numpy.ndarray
+	copy : numpy.ndarray
 		The 0-padded copy of the input array.
 
 	Exemple
 	-------
 	In [0] : _ = np.ones((5, 5))
-	In [1] : RecadrePyr(_)
-	Out [2] : array([[0, 1, 1, 1, 1, 1, 0],
-					 [0, 1, 1, 1, 1, 1, 0],
-					 [0, 1, 1, 1, 1, 1, 0],
-					 [0, 1, 1, 1, 1, 1, 0],
-					 [0, 1, 1, 1, 1, 1, 0]])
+	In [1] : recadre_pyr(_)
+	Out [2]: array([[0, 1, 1, 1, 1, 1, 0],
+					[0, 1, 1, 1, 1, 1, 0],
+					[0, 1, 1, 1, 1, 1, 0],
+					[0, 1, 1, 1, 1, 1, 0],
+					[0, 1, 1, 1, 1, 1, 0]])
 
 	"""
-	Copy = np.zeros((Base.shape[0], Base.shape[1]+2))
-	Copy[:, 1:-1] = Base
-	return Copy
+	copy = np.zeros((board.shape[0], board.shape[1]+2))
+	copy[:, 1:-1] = np.copy(board)
+	return copy
 
-def Rule20(Base):
+def rule20(board):
 	"""
 	Function to applie the 20-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 20-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 20-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule20(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule20(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule21(Base):
+def rule21(board):
 	"""
 	Function to applie the 21-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 21-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 21-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule21(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule21(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule22(Base):
+def rule22(board):
 	"""
 	Function to applie the 22-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 22-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 22-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule22(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule22(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule23(Base):
+def rule23(board):
 	"""
 	Function to applie the 23-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 23-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 23-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule23(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule23(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule24(Base):
+def rule24(board):
 	"""
 	Function to applie the 24-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 24-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 24-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule24(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule24(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule25(Base):
+def rule25(board):
 	"""
 	Function to applie the 25-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 25-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 25-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule25(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule25(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule26(Base):
+def rule26(board):
 	"""
 	Function to applie the 26-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 26-dimensionals numpy.ndarray that will be filled following
 		the 26-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 26-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule26(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule26(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule27(Base):
+def rule27(board):
 	"""
 	Function to applie the 27-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 27-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 27-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule27(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule27(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule28(Base):
+def rule28(board):
 	"""
 	Function to applie the 28-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 28-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 28-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule28(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule28(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule29(Base):
+def rule29(board):
 	"""
 	Function to applie the 29-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 29-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 29-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule29(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule29(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule30(Base):
+def rule30(board):
 	"""
 	Function to applie the 30-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 30-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 30-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule30(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule30(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule31(Base):
+def rule31(board):
 	"""
 	Function to applie the 31-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 31-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 31-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule31(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule31(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule32(Base):
+def rule32(board):
 	"""
 	Function to applie the 32-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 32-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 32-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule32(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule32(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule33(Base):
+def rule33(board):
 	"""
 	Function to applie the 33-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 33-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 33-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule33(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule33(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule34(Base):
+def rule34(board):
 	"""
 	Function to applie the 34-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 34-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 34-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule34(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule34(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule35(Base):
+def rule35(board):
 	"""
 	Function to applie the 35-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 35-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 35-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule35(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule35(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule36(Base):
+def rule36(board):
 	"""
 	Function to applie the 36-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 36-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 36-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule36(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+	In [2] : rule36(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 1
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 1
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule37(Base):
+def rule37(board):
 	"""
 	Function to applie the 37-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 37-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 37-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule37(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
+	In [2] : rule37(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule38(Base):
+def rule38(board):
 	"""
 	Function to applie the 38-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 38-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 38-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule38(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
+	In [2] : rule38(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board
 
-def Rule39(Base):
+def rule39(board):
 	"""
 	Function to applie the 39-th rule.
 
 	Parameters
 	----------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The empty 2-dimensionals numpy.ndarray that will be filled following
 		the 39-th rule.
 
 	Returns
 	-------
-	Base : numpy.ndarray
+	board : numpy.ndarray
 		The result applying the 39-th rule.
 
 	Exemple
 	-------
 	In [0] : _ = np.zeros((16, 17))
 	In [1] : _[0, 17//2] = 1
-	In [2] : Rule39(_)
-	Out [2] : array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
+	In [2] : rule39(_)
+	Out [2]: array([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
 
 	"""
-	CBase = RecadrePyr(Base)
+	copy_board = recadre_pyr(board)
 	kernel = np.array([-1, 0, 1])[:, np.newaxis]
-	ranje = np.arange(1, CBase.shape[1]-1)+kernel
-	for n in range(0, CBase.shape[0]-1):
-		Condit = CBase[n, ranje].T
-		Base[n+1, np.sum(Condit == [0, 0, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 0, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 0], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [0, 0, 1], axis=1) == 3] = 1
-		Base[n+1, np.sum(Condit == [1, 1, 0], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 0, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [0, 1, 1], axis=1) == 3] = 0
-		Base[n+1, np.sum(Condit == [1, 1, 1], axis=1) == 3] = 0
-		CBase[n+1, 1:-1] = Base[n+1]
+	ranje = np.arange(1, copy_board.shape[1]-1)+kernel
+	for n in range(0, copy_board.shape[0]-1):
+		condition = copy_board[n, ranje].T
+		board[n+1, np.sum(condition == [0, 0, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 0, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 0], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [0, 0, 1], axis=1) == 3] = 1
+		board[n+1, np.sum(condition == [1, 1, 0], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 0, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [0, 1, 1], axis=1) == 3] = 0
+		board[n+1, np.sum(condition == [1, 1, 1], axis=1) == 3] = 0
+		copy_board[n+1, 1:-1] = board[n+1]
 
-	return Base
+	return board

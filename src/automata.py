@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Mar 19 13:12:40 2023
-
 @author: Matthieu Nougaret
+
+This moule contain the main function to use to compute the cellular automaton
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,645 +20,669 @@ from rules180_199 import *
 from rules200_219 import *
 from rules220_239 import *
 from rules240_255 import *
-
-
-def ApplicationRules(Shape, RuleN, Start='center', Seed=None, Plot=True,
-					 SavePath=None, FgSz1=(10, 10), FgSz2=(15, 10)):
+#=============================================================================
+def application_rules(shape, rule_num, start='center', seed=None, plot=True,
+					 save_path=None, fig_sz1=(10, 10), fig_sz2=(15, 10)):
 	"""
 	Function to applied one of the 256 possible rules.
 
 	Parameters
 	----------
-	Shape : tuple or int
+	shape : tuple or int
 		Shape/size of the array that will be used for the cellular automata.
-	RuleN : int
+	rule_num : int
 		The number of the rule that will be used.
-	Start : str, optional
+	start : str, optional
 		Indicate how the the cellular automata will be initialized. The
 		default is 'center'.
-	Seed : NoneType, optional
+	seed : NoneType, optional
 		Parameter to make its own initialisaion of the automata. It must have
-		the same length as the width indicate for the 'Shape' parameter. It
+		the same length as the width indicate for the 'shape' parameter. It
 		must be a list or numpy.ndarray type. If NoneType, the initialisation
-		of the automata will follow the 'Start' parameter indication. The
+		of the automata will follow the 'start' parameter indication. The
 		default is None.
-	Plot : bool, optional
+	plot : bool, optional
 		Indicate if the result will be ploted. The default is True.
-	SavePath : str, optional
+	save_path : str, optional
 		Path to where the plot will be saved. The default is None.
-	FgSz1 : tuple, optional
-		Size of the figure that will show the final state of the automata. The
-		default is (10, 10).
-	FgSz2 : tuple, optional
-		Size of the figure that will show the evolution of the automata state.
-		The default is (15, 10).
+	fig_sz1 : tuple, optional
+		Size of the figure that will show the final state of the automata.
+		The default is (10, 10).
+	fig_sz2 : tuple, optional
+		Size of the figure that will show the evolution of the automata
+		state. The default is (15, 10).
 
 	Raises
 	------
 	ValueError
-		'Start' parameter is not from the possible list.
+		'start' parameter is not from the possible list.
 	ValueError
 		The asked rule doesn't exist.
 
 	Returns
 	-------
-	Table : numpy.ndarray
+	board : numpy.ndarray
 		Final state of the automata.
-	SumVert : numpy.ndarray
+	sum_vert : numpy.ndarray
 		Sum of the final state over the axis 0.
-	SumHori : numpy.ndarray
+	sum_hori : numpy.ndarray
 		Sum of the final state over the axis 1.
 
+	Example
+	-------
+	In [0] : application_rules((13, 13), 15, start='center', seed=None,
+							   plot=True, save_path=None, fig_sz1=(10, 10),
+							   fig_sz2=(15, 10))
+
+	Out [0]: (np.array([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+						[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1],
+						[0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0],
+						[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+						[1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+						[0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
+						[1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+						[0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+						[1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+						[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+						[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+						[0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]]),
+			  np.array([5, 4, 8, 7, 6, 5, 9, 5, 6, 7, 8, 4, 5]),
+			  np.array([1, 10, 7, 2, 7, 5, 3, 6, 5, 0, 13, 11, 9]))
+
 	"""
-	if (type(Shape) == int)|(type(Shape) == float):
-		Shape = (int(Shape), int(Shape))
+	if (type(shape) == int)|(type(shape) == float):
+		shape = (int(shape), int(shape))
 
-	Table = np.zeros(Shape)
+	board = np.zeros(shape)
 
-	if Start == 'center':
-		Table[0, Shape[1]//2] = 1
-	elif Start == 'bin_w':
-		Table[0, (np.arange(Shape[1])%2) == 0] = 1
-	elif Start == 'bin_k':
-		Table[0, (np.arange(Shape[1])%2) == 1] = 1
-	elif Start == 'rand':
-		Table[0] = np.random.randint(0, 2, Shape[1])
+	if start == 'center':
+		board[0, shape[1]//2] = 1
+	elif start == 'bin_w':
+		board[0, (np.arange(shape[1])%2) == 0] = 1
+	elif start == 'bin_k':
+		board[0, (np.arange(shape[1])%2) == 1] = 1
+	elif start == 'rand':
+		board[0] = np.random.randint(0, 2, shape[1])
 	else:
-		raise ValueError('Start parameter must be from the list: ["center",'+
-						 ' "bin_w", "bin_k", "rand"]. Get '+str(Start))
+		raise ValueError('start parameter must be from the list: ["center",'
+						+ ' "bin_w", "bin_k", "rand"]. Get ' + str(start))
 
-	if type(Seed) == np.ndarray:
-		Table[0] = Seed
+	if type(seed) == np.ndarray:
+		board[0] = seed
 
-	List = list(range(256))
-	if RuleN not in List:
-		raise ValueError("There are 256 rules, from 0 to 255. Get "+str(RuleN))
+	list_rules = list(range(256))
+	if rule_num not in list_rules:
+		raise ValueError("There are 256 rules, from 0 to 255. Get "
+						 + str(rule_num))
 
-	if RuleN == 0:
-		Table = Rule0(Table)
-	elif RuleN == 1:
-		Table = Rule1(Table)
-	elif RuleN == 2:
-		Table = Rule2(Table)
-	elif RuleN == 3:
-		Table = Rule3(Table)
-	elif RuleN == 4:
-		Table = Rule4(Table)
-	elif RuleN == 5:
-		Table = Rule5(Table)
-	elif RuleN == 6:
-		Table = Rule6(Table)
-	elif RuleN == 7:
-		Table = Rule7(Table)
-	elif RuleN == 8:
-		Table = Rule8(Table)
-	elif RuleN == 9:
-		Table = Rule9(Table)
-	elif RuleN == 10:
-		Table = Rule10(Table)
-	elif RuleN == 11:
-		Table = Rule11(Table)
-	elif RuleN == 12:
-		Table = Rule12(Table)
-	elif RuleN == 13:
-		Table = Rule13(Table)
-	elif RuleN == 14:
-		Table = Rule14(Table)
-	elif RuleN == 15:
-		Table = Rule15(Table)
-	elif RuleN == 16:
-		Table = Rule16(Table)
-	elif RuleN == 17:
-		Table = Rule17(Table)
-	elif RuleN == 18:
-		Table = Rule18(Table)
-	elif RuleN == 19:
-		Table = Rule19(Table)
-	elif RuleN == 20:
-		Table = Rule20(Table)
-	elif RuleN == 21:
-		Table = Rule21(Table)
-	elif RuleN == 22:
-		Table = Rule22(Table)
-	elif RuleN == 23:
-		Table = Rule23(Table)
-	elif RuleN == 24:
-		Table = Rule24(Table)
-	elif RuleN == 25:
-		Table = Rule25(Table)
-	elif RuleN == 26:
-		Table = Rule26(Table)
-	elif RuleN == 27:
-		Table = Rule27(Table)
-	elif RuleN == 28:
-		Table = Rule28(Table)
-	elif RuleN == 29:
-		Table = Rule29(Table)
-	elif RuleN == 30:
-		Table = Rule30(Table)
-	elif RuleN == 31:
-		Table = Rule31(Table)
-	elif RuleN == 32:
-		Table = Rule32(Table)
-	elif RuleN == 33:
-		Table = Rule33(Table)
-	elif RuleN == 34:
-		Table = Rule34(Table)
-	elif RuleN == 35:
-		Table = Rule35(Table)
-	elif RuleN == 36:
-		Table = Rule36(Table)
-	elif RuleN == 37:
-		Table = Rule37(Table)
-	elif RuleN == 38:
-		Table = Rule38(Table)
-	elif RuleN == 39:
-		Table = Rule39(Table)
-	elif RuleN == 40:
-		Table = Rule40(Table)
-	elif RuleN == 41:
-		Table = Rule41(Table)
-	elif RuleN == 42:
-		Table = Rule42(Table)
-	elif RuleN == 43:
-		Table = Rule43(Table)
-	elif RuleN == 44:
-		Table = Rule44(Table)
-	elif RuleN == 45:
-		Table = Rule45(Table)
-	elif RuleN == 46:
-		Table = Rule46(Table)
-	elif RuleN == 47:
-		Table = Rule47(Table)
-	elif RuleN == 48:
-		Table = Rule48(Table)
-	elif RuleN == 49:
-		Table = Rule49(Table)
-	elif RuleN == 50:
-		Table = Rule50(Table)
-	elif RuleN == 51:
-		Table = Rule51(Table)
-	elif RuleN == 52:
-		Table = Rule52(Table)
-	elif RuleN == 53:
-		Table = Rule53(Table)
-	elif RuleN == 54:
-		Table = Rule54(Table)
-	elif RuleN == 55:
-		Table = Rule55(Table)
-	elif RuleN == 56:
-		Table = Rule56(Table)
-	elif RuleN == 57:
-		Table = Rule57(Table)
-	elif RuleN == 58:
-		Table = Rule58(Table)
-	elif RuleN == 59:
-		Table = Rule59(Table)
-	elif RuleN == 60:
-		Table = Rule60(Table)
-	elif RuleN == 61:
-		Table = Rule61(Table)
-	elif RuleN == 62:
-		Table = Rule62(Table)
-	elif RuleN == 63:
-		Table = Rule63(Table)
-	elif RuleN == 64:
-		Table = Rule64(Table)
-	elif RuleN == 65:
-		Table = Rule65(Table)
-	elif RuleN == 66:
-		Table = Rule66(Table)
-	elif RuleN == 67:
-		Table = Rule67(Table)
-	elif RuleN == 68:
-		Table = Rule68(Table)
-	elif RuleN == 69:
-		Table = Rule69(Table)
-	elif RuleN == 70:
-		Table = Rule70(Table)
-	elif RuleN == 71:
-		Table = Rule71(Table)
-	elif RuleN == 72:
-		Table = Rule72(Table)
-	elif RuleN == 73:
-		Table = Rule73(Table)
-	elif RuleN == 74:
-		Table = Rule74(Table)
-	elif RuleN == 75:
-		Table = Rule75(Table)
-	elif RuleN == 76:
-		Table = Rule76(Table)
-	elif RuleN == 77:
-		Table = Rule77(Table)
-	elif RuleN == 78:
-		Table = Rule78(Table)
-	elif RuleN == 79:
-		Table = Rule79(Table)
-	elif RuleN == 80:
-		Table = Rule80(Table)
-	elif RuleN == 81:
-		Table = Rule81(Table)
-	elif RuleN == 82:
-		Table = Rule82(Table)
-	elif RuleN == 83:
-		Table = Rule83(Table)
-	elif RuleN == 84:
-		Table = Rule84(Table)
-	elif RuleN == 85:
-		Table = Rule85(Table)
-	elif RuleN == 86:
-		Table = Rule86(Table)
-	elif RuleN == 87:
-		Table = Rule87(Table)
-	elif RuleN == 88:
-		Table = Rule88(Table)
-	elif RuleN == 89:
-		Table = Rule89(Table)
-	elif RuleN == 90:
-		Table = Rule90(Table)
-	elif RuleN == 91:
-		Table = Rule91(Table)
-	elif RuleN == 92:
-		Table = Rule92(Table)
-	elif RuleN == 93:
-		Table = Rule93(Table)
-	elif RuleN == 94:
-		Table = Rule94(Table)
-	elif RuleN == 95:
-		Table = Rule95(Table)
-	elif RuleN == 96:
-		Table = Rule96(Table)
-	elif RuleN == 97:
-		Table = Rule97(Table)
-	elif RuleN == 98:
-		Table = Rule98(Table)
-	elif RuleN == 99:
-		Table = Rule99(Table)
-	elif RuleN == 100:
-		Table = Rule100(Table)
-	elif RuleN == 101:
-		Table = Rule101(Table)
-	elif RuleN == 102:
-		Table = Rule102(Table)
-	elif RuleN == 103:
-		Table = Rule103(Table)
-	elif RuleN == 104:
-		Table = Rule104(Table)
-	elif RuleN == 105:
-		Table = Rule105(Table)
-	elif RuleN == 106:
-		Table = Rule106(Table)
-	elif RuleN == 107:
-		Table = Rule107(Table)
-	elif RuleN == 108:
-		Table = Rule108(Table)
-	elif RuleN == 109:
-		Table = Rule109(Table)
-	elif RuleN == 110:
-		Table = Rule110(Table)
-	elif RuleN == 111:
-		Table = Rule111(Table)
-	elif RuleN == 112:
-		Table = Rule112(Table)
-	elif RuleN == 113:
-		Table = Rule113(Table)
-	elif RuleN == 114:
-		Table = Rule114(Table)
-	elif RuleN == 115:
-		Table = Rule115(Table)
-	elif RuleN == 116:
-		Table = Rule116(Table)
-	elif RuleN == 117:
-		Table = Rule117(Table)
-	elif RuleN == 118:
-		Table = Rule118(Table)
-	elif RuleN == 119:
-		Table = Rule119(Table)
-	elif RuleN == 120:
-		Table = Rule120(Table)
-	elif RuleN == 121:
-		Table = Rule121(Table)
-	elif RuleN == 122:
-		Table = Rule122(Table)
-	elif RuleN == 123:
-		Table = Rule123(Table)
-	elif RuleN == 124:
-		Table = Rule124(Table)
-	elif RuleN == 125:
-		Table = Rule125(Table)
-	elif RuleN == 126:
-		Table = Rule126(Table)
-	elif RuleN == 127:
-		Table = Rule127(Table)
-	elif RuleN == 128:
-		Table = Rule128(Table)
-	elif RuleN == 129:
-		Table = Rule129(Table)
-	elif RuleN == 130:
-		Table = Rule130(Table)
-	elif RuleN == 131:
-		Table = Rule131(Table)
-	elif RuleN == 132:
-		Table = Rule132(Table)
-	elif RuleN == 133:
-		Table = Rule133(Table)
-	elif RuleN == 134:
-		Table = Rule134(Table)
-	elif RuleN == 135:
-		Table = Rule135(Table)
-	elif RuleN == 136:
-		Table = Rule136(Table)
-	elif RuleN == 137:
-		Table = Rule137(Table)
-	elif RuleN == 138:
-		Table = Rule138(Table)
-	elif RuleN == 139:
-		Table = Rule139(Table)
-	elif RuleN == 140:
-		Table = Rule140(Table)
-	elif RuleN == 141:
-		Table = Rule141(Table)
-	elif RuleN == 142:
-		Table = Rule142(Table)
-	elif RuleN == 143:
-		Table = Rule143(Table)
-	elif RuleN == 144:
-		Table = Rule144(Table)
-	elif RuleN == 145:
-		Table = Rule145(Table)
-	elif RuleN == 146:
-		Table = Rule146(Table)
-	elif RuleN == 147:
-		Table = Rule147(Table)
-	elif RuleN == 148:
-		Table = Rule148(Table)
-	elif RuleN == 149:
-		Table = Rule149(Table)
-	elif RuleN == 150:
-		Table = Rule150(Table)
-	elif RuleN == 151:
-		Table = Rule151(Table)
-	elif RuleN == 152:
-		Table = Rule152(Table)
-	elif RuleN == 153:
-		Table = Rule153(Table)
-	elif RuleN == 154:
-		Table = Rule154(Table)
-	elif RuleN == 155:
-		Table = Rule155(Table)
-	elif RuleN == 156:
-		Table = Rule156(Table)
-	elif RuleN == 157:
-		Table = Rule157(Table)
-	elif RuleN == 158:
-		Table = Rule158(Table)
-	elif RuleN == 159:
-		Table = Rule159(Table)
-	elif RuleN == 160:
-		Table = Rule160(Table)
-	elif RuleN == 161:
-		Table = Rule161(Table)
-	elif RuleN == 162:
-		Table = Rule162(Table)
-	elif RuleN == 163:
-		Table = Rule163(Table)
-	elif RuleN == 164:
-		Table = Rule164(Table)
-	elif RuleN == 165:
-		Table = Rule165(Table)
-	elif RuleN == 166:
-		Table = Rule166(Table)
-	elif RuleN == 167:
-		Table = Rule167(Table)
-	elif RuleN == 168:
-		Table = Rule168(Table)
-	elif RuleN == 169:
-		Table = Rule169(Table)
-	elif RuleN == 170:
-		Table = Rule170(Table)
-	elif RuleN == 171:
-		Table = Rule171(Table)
-	elif RuleN == 172:
-		Table = Rule172(Table)
-	elif RuleN == 173:
-		Table = Rule173(Table)
-	elif RuleN == 174:
-		Table = Rule174(Table)
-	elif RuleN == 175:
-		Table = Rule175(Table)
-	elif RuleN == 176:
-		Table = Rule176(Table)
-	elif RuleN == 177:
-		Table = Rule177(Table)
-	elif RuleN == 178:
-		Table = Rule178(Table)
-	elif RuleN == 179:
-		Table = Rule179(Table)
-	elif RuleN == 180:
-		Table = Rule180(Table)
-	elif RuleN == 181:
-		Table = Rule181(Table)
-	elif RuleN == 182:
-		Table = Rule182(Table)
-	elif RuleN == 183:
-		Table = Rule183(Table)
-	elif RuleN == 184:
-		Table = Rule184(Table)
-	elif RuleN == 185:
-		Table = Rule185(Table)
-	elif RuleN == 186:
-		Table = Rule186(Table)
-	elif RuleN == 187:
-		Table = Rule187(Table)
-	elif RuleN == 188:
-		Table = Rule188(Table)
-	elif RuleN == 189:
-		Table = Rule189(Table)
-	elif RuleN == 190:
-		Table = Rule190(Table)
-	elif RuleN == 191:
-		Table = Rule191(Table)
-	elif RuleN == 192:
-		Table = Rule192(Table)
-	elif RuleN == 193:
-		Table = Rule193(Table)
-	elif RuleN == 194:
-		Table = Rule194(Table)
-	elif RuleN == 195:
-		Table = Rule195(Table)
-	elif RuleN == 196:
-		Table = Rule196(Table)
-	elif RuleN == 197:
-		Table = Rule197(Table)
-	elif RuleN == 198:
-		Table = Rule198(Table)
-	elif RuleN == 199:
-		Table = Rule199(Table)
-	elif RuleN == 200:
-		Table = Rule200(Table)
-	elif RuleN == 201:
-		Table = Rule201(Table)
-	elif RuleN == 202:
-		Table = Rule202(Table)
-	elif RuleN == 203:
-		Table = Rule203(Table)
-	elif RuleN == 204:
-		Table = Rule204(Table)
-	elif RuleN == 205:
-		Table = Rule205(Table)
-	elif RuleN == 206:
-		Table = Rule206(Table)
-	elif RuleN == 207:
-		Table = Rule207(Table)
-	elif RuleN == 208:
-		Table = Rule208(Table)
-	elif RuleN == 209:
-		Table = Rule209(Table)
-	elif RuleN == 210:
-		Table = Rule210(Table)
-	elif RuleN == 211:
-		Table = Rule211(Table)
-	elif RuleN == 212:
-		Table = Rule212(Table)
-	elif RuleN == 213:
-		Table = Rule213(Table)
-	elif RuleN == 214:
-		Table = Rule214(Table)
-	elif RuleN == 215:
-		Table = Rule215(Table)
-	elif RuleN == 216:
-		Table = Rule216(Table)
-	elif RuleN == 217:
-		Table = Rule217(Table)
-	elif RuleN == 218:
-		Table = Rule218(Table)
-	elif RuleN == 219:
-		Table = Rule219(Table)
-	elif RuleN == 220:
-		Table = Rule220(Table)
-	elif RuleN == 221:
-		Table = Rule221(Table)
-	elif RuleN == 222:
-		Table = Rule222(Table)
-	elif RuleN == 223:
-		Table = Rule223(Table)
-	elif RuleN == 224:
-		Table = Rule224(Table)
-	elif RuleN == 225:
-		Table = Rule225(Table)
-	elif RuleN == 226:
-		Table = Rule226(Table)
-	elif RuleN == 227:
-		Table = Rule227(Table)
-	elif RuleN == 228:
-		Table = Rule228(Table)
-	elif RuleN == 229:
-		Table = Rule229(Table)
-	elif RuleN == 230:
-		Table = Rule230(Table)
-	elif RuleN == 231:
-		Table = Rule231(Table)
-	elif RuleN == 232:
-		Table = Rule232(Table)
-	elif RuleN == 233:
-		Table = Rule233(Table)
-	elif RuleN == 234:
-		Table = Rule234(Table)
-	elif RuleN == 235:
-		Table = Rule235(Table)
-	elif RuleN == 236:
-		Table = Rule236(Table)
-	elif RuleN == 237:
-		Table = Rule237(Table)
-	elif RuleN == 238:
-		Table = Rule238(Table)
-	elif RuleN == 239:
-		Table = Rule239(Table)
-	elif RuleN == 240:
-		Table = Rule240(Table)
-	elif RuleN == 241:
-		Table = Rule241(Table)
-	elif RuleN == 242:
-		Table = Rule242(Table)
-	elif RuleN == 243:
-		Table = Rule243(Table)
-	elif RuleN == 244:
-		Table = Rule244(Table)
-	elif RuleN == 245:
-		Table = Rule245(Table)
-	elif RuleN == 246:
-		Table = Rule246(Table)
-	elif RuleN == 247:
-		Table = Rule247(Table)
-	elif RuleN == 248:
-		Table = Rule248(Table)
-	elif RuleN == 249:
-		Table = Rule249(Table)
-	elif RuleN == 250:
-		Table = Rule250(Table)
-	elif RuleN == 251:
-		Table = Rule251(Table)
-	elif RuleN == 252:
-		Table = Rule252(Table)
-	elif RuleN == 253:
-		Table = Rule253(Table)
-	elif RuleN == 254:
-		Table = Rule254(Table)
-	elif RuleN == 255:
-		Table = Rule255(Table)
+	if rule_num == 0:
+		board = rule0(board)
+	elif rule_num == 1:
+		board = rule1(board)
+	elif rule_num == 2:
+		board = rule2(board)
+	elif rule_num == 3:
+		board = rule3(board)
+	elif rule_num == 4:
+		board = rule4(board)
+	elif rule_num == 5:
+		board = rule5(board)
+	elif rule_num == 6:
+		board = rule6(board)
+	elif rule_num == 7:
+		board = rule7(board)
+	elif rule_num == 8:
+		board = rule8(board)
+	elif rule_num == 9:
+		board = rule9(board)
+	elif rule_num == 10:
+		board = rule10(board)
+	elif rule_num == 11:
+		board = rule11(board)
+	elif rule_num == 12:
+		board = rule12(board)
+	elif rule_num == 13:
+		board = rule13(board)
+	elif rule_num == 14:
+		board = rule14(board)
+	elif rule_num == 15:
+		board = rule15(board)
+	elif rule_num == 16:
+		board = rule16(board)
+	elif rule_num == 17:
+		board = rule17(board)
+	elif rule_num == 18:
+		board = rule18(board)
+	elif rule_num == 19:
+		board = rule19(board)
+	elif rule_num == 20:
+		board = rule20(board)
+	elif rule_num == 21:
+		board = rule21(board)
+	elif rule_num == 22:
+		board = rule22(board)
+	elif rule_num == 23:
+		board = rule23(board)
+	elif rule_num == 24:
+		board = rule24(board)
+	elif rule_num == 25:
+		board = rule25(board)
+	elif rule_num == 26:
+		board = rule26(board)
+	elif rule_num == 27:
+		board = rule27(board)
+	elif rule_num == 28:
+		board = rule28(board)
+	elif rule_num == 29:
+		board = rule29(board)
+	elif rule_num == 30:
+		board = rule30(board)
+	elif rule_num == 31:
+		board = rule31(board)
+	elif rule_num == 32:
+		board = rule32(board)
+	elif rule_num == 33:
+		board = rule33(board)
+	elif rule_num == 34:
+		board = rule34(board)
+	elif rule_num == 35:
+		board = rule35(board)
+	elif rule_num == 36:
+		board = rule36(board)
+	elif rule_num == 37:
+		board = rule37(board)
+	elif rule_num == 38:
+		board = rule38(board)
+	elif rule_num == 39:
+		board = rule39(board)
+	elif rule_num == 40:
+		board = rule40(board)
+	elif rule_num == 41:
+		board = rule41(board)
+	elif rule_num == 42:
+		board = rule42(board)
+	elif rule_num == 43:
+		board = rule43(board)
+	elif rule_num == 44:
+		board = rule44(board)
+	elif rule_num == 45:
+		board = rule45(board)
+	elif rule_num == 46:
+		board = rule46(board)
+	elif rule_num == 47:
+		board = rule47(board)
+	elif rule_num == 48:
+		board = rule48(board)
+	elif rule_num == 49:
+		board = rule49(board)
+	elif rule_num == 50:
+		board = rule50(board)
+	elif rule_num == 51:
+		board = rule51(board)
+	elif rule_num == 52:
+		board = rule52(board)
+	elif rule_num == 53:
+		board = rule53(board)
+	elif rule_num == 54:
+		board = rule54(board)
+	elif rule_num == 55:
+		board = rule55(board)
+	elif rule_num == 56:
+		board = rule56(board)
+	elif rule_num == 57:
+		board = rule57(board)
+	elif rule_num == 58:
+		board = rule58(board)
+	elif rule_num == 59:
+		board = rule59(board)
+	elif rule_num == 60:
+		board = rule60(board)
+	elif rule_num == 61:
+		board = rule61(board)
+	elif rule_num == 62:
+		board = rule62(board)
+	elif rule_num == 63:
+		board = rule63(board)
+	elif rule_num == 64:
+		board = rule64(board)
+	elif rule_num == 65:
+		board = rule65(board)
+	elif rule_num == 66:
+		board = rule66(board)
+	elif rule_num == 67:
+		board = rule67(board)
+	elif rule_num == 68:
+		board = rule68(board)
+	elif rule_num == 69:
+		board = rule69(board)
+	elif rule_num == 70:
+		board = rule70(board)
+	elif rule_num == 71:
+		board = rule71(board)
+	elif rule_num == 72:
+		board = rule72(board)
+	elif rule_num == 73:
+		board = rule73(board)
+	elif rule_num == 74:
+		board = rule74(board)
+	elif rule_num == 75:
+		board = rule75(board)
+	elif rule_num == 76:
+		board = rule76(board)
+	elif rule_num == 77:
+		board = rule77(board)
+	elif rule_num == 78:
+		board = rule78(board)
+	elif rule_num == 79:
+		board = rule79(board)
+	elif rule_num == 80:
+		board = rule80(board)
+	elif rule_num == 81:
+		board = rule81(board)
+	elif rule_num == 82:
+		board = rule82(board)
+	elif rule_num == 83:
+		board = rule83(board)
+	elif rule_num == 84:
+		board = rule84(board)
+	elif rule_num == 85:
+		board = rule85(board)
+	elif rule_num == 86:
+		board = rule86(board)
+	elif rule_num == 87:
+		board = rule87(board)
+	elif rule_num == 88:
+		board = rule88(board)
+	elif rule_num == 89:
+		board = rule89(board)
+	elif rule_num == 90:
+		board = rule90(board)
+	elif rule_num == 91:
+		board = rule91(board)
+	elif rule_num == 92:
+		board = rule92(board)
+	elif rule_num == 93:
+		board = rule93(board)
+	elif rule_num == 94:
+		board = rule94(board)
+	elif rule_num == 95:
+		board = rule95(board)
+	elif rule_num == 96:
+		board = rule96(board)
+	elif rule_num == 97:
+		board = rule97(board)
+	elif rule_num == 98:
+		board = rule98(board)
+	elif rule_num == 99:
+		board = rule99(board)
+	elif rule_num == 100:
+		board = rule100(board)
+	elif rule_num == 101:
+		board = rule101(board)
+	elif rule_num == 102:
+		board = rule102(board)
+	elif rule_num == 103:
+		board = rule103(board)
+	elif rule_num == 104:
+		board = rule104(board)
+	elif rule_num == 105:
+		board = rule105(board)
+	elif rule_num == 106:
+		board = rule106(board)
+	elif rule_num == 107:
+		board = rule107(board)
+	elif rule_num == 108:
+		board = rule108(board)
+	elif rule_num == 109:
+		board = rule109(board)
+	elif rule_num == 110:
+		board = rule110(board)
+	elif rule_num == 111:
+		board = rule111(board)
+	elif rule_num == 112:
+		board = rule112(board)
+	elif rule_num == 113:
+		board = rule113(board)
+	elif rule_num == 114:
+		board = rule114(board)
+	elif rule_num == 115:
+		board = rule115(board)
+	elif rule_num == 116:
+		board = rule116(board)
+	elif rule_num == 117:
+		board = rule117(board)
+	elif rule_num == 118:
+		board = rule118(board)
+	elif rule_num == 119:
+		board = rule119(board)
+	elif rule_num == 120:
+		board = rule120(board)
+	elif rule_num == 121:
+		board = rule121(board)
+	elif rule_num == 122:
+		board = rule122(board)
+	elif rule_num == 123:
+		board = rule123(board)
+	elif rule_num == 124:
+		board = rule124(board)
+	elif rule_num == 125:
+		board = rule125(board)
+	elif rule_num == 126:
+		board = rule126(board)
+	elif rule_num == 127:
+		board = rule127(board)
+	elif rule_num == 128:
+		board = rule128(board)
+	elif rule_num == 129:
+		board = rule129(board)
+	elif rule_num == 130:
+		board = rule130(board)
+	elif rule_num == 131:
+		board = rule131(board)
+	elif rule_num == 132:
+		board = rule132(board)
+	elif rule_num == 133:
+		board = rule133(board)
+	elif rule_num == 134:
+		board = rule134(board)
+	elif rule_num == 135:
+		board = rule135(board)
+	elif rule_num == 136:
+		board = rule136(board)
+	elif rule_num == 137:
+		board = rule137(board)
+	elif rule_num == 138:
+		board = rule138(board)
+	elif rule_num == 139:
+		board = rule139(board)
+	elif rule_num == 140:
+		board = rule140(board)
+	elif rule_num == 141:
+		board = rule141(board)
+	elif rule_num == 142:
+		board = rule142(board)
+	elif rule_num == 143:
+		board = rule143(board)
+	elif rule_num == 144:
+		board = rule144(board)
+	elif rule_num == 145:
+		board = rule145(board)
+	elif rule_num == 146:
+		board = rule146(board)
+	elif rule_num == 147:
+		board = rule147(board)
+	elif rule_num == 148:
+		board = rule148(board)
+	elif rule_num == 149:
+		board = rule149(board)
+	elif rule_num == 150:
+		board = rule150(board)
+	elif rule_num == 151:
+		board = rule151(board)
+	elif rule_num == 152:
+		board = rule152(board)
+	elif rule_num == 153:
+		board = rule153(board)
+	elif rule_num == 154:
+		board = rule154(board)
+	elif rule_num == 155:
+		board = rule155(board)
+	elif rule_num == 156:
+		board = rule156(board)
+	elif rule_num == 157:
+		board = rule157(board)
+	elif rule_num == 158:
+		board = rule158(board)
+	elif rule_num == 159:
+		board = rule159(board)
+	elif rule_num == 160:
+		board = rule160(board)
+	elif rule_num == 161:
+		board = rule161(board)
+	elif rule_num == 162:
+		board = rule162(board)
+	elif rule_num == 163:
+		board = rule163(board)
+	elif rule_num == 164:
+		board = rule164(board)
+	elif rule_num == 165:
+		board = rule165(board)
+	elif rule_num == 166:
+		board = rule166(board)
+	elif rule_num == 167:
+		board = rule167(board)
+	elif rule_num == 168:
+		board = rule168(board)
+	elif rule_num == 169:
+		board = rule169(board)
+	elif rule_num == 170:
+		board = rule170(board)
+	elif rule_num == 171:
+		board = rule171(board)
+	elif rule_num == 172:
+		board = rule172(board)
+	elif rule_num == 173:
+		board = rule173(board)
+	elif rule_num == 174:
+		board = rule174(board)
+	elif rule_num == 175:
+		board = rule175(board)
+	elif rule_num == 176:
+		board = rule176(board)
+	elif rule_num == 177:
+		board = rule177(board)
+	elif rule_num == 178:
+		board = rule178(board)
+	elif rule_num == 179:
+		board = rule179(board)
+	elif rule_num == 180:
+		board = rule180(board)
+	elif rule_num == 181:
+		board = rule181(board)
+	elif rule_num == 182:
+		board = rule182(board)
+	elif rule_num == 183:
+		board = rule183(board)
+	elif rule_num == 184:
+		board = rule184(board)
+	elif rule_num == 185:
+		board = rule185(board)
+	elif rule_num == 186:
+		board = rule186(board)
+	elif rule_num == 187:
+		board = rule187(board)
+	elif rule_num == 188:
+		board = rule188(board)
+	elif rule_num == 189:
+		board = rule189(board)
+	elif rule_num == 190:
+		board = rule190(board)
+	elif rule_num == 191:
+		board = rule191(board)
+	elif rule_num == 192:
+		board = rule192(board)
+	elif rule_num == 193:
+		board = rule193(board)
+	elif rule_num == 194:
+		board = rule194(board)
+	elif rule_num == 195:
+		board = rule195(board)
+	elif rule_num == 196:
+		board = rule196(board)
+	elif rule_num == 197:
+		board = rule197(board)
+	elif rule_num == 198:
+		board = rule198(board)
+	elif rule_num == 199:
+		board = rule199(board)
+	elif rule_num == 200:
+		board = rule200(board)
+	elif rule_num == 201:
+		board = rule201(board)
+	elif rule_num == 202:
+		board = rule202(board)
+	elif rule_num == 203:
+		board = rule203(board)
+	elif rule_num == 204:
+		board = rule204(board)
+	elif rule_num == 205:
+		board = rule205(board)
+	elif rule_num == 206:
+		board = rule206(board)
+	elif rule_num == 207:
+		board = rule207(board)
+	elif rule_num == 208:
+		board = rule208(board)
+	elif rule_num == 209:
+		board = rule209(board)
+	elif rule_num == 210:
+		board = rule210(board)
+	elif rule_num == 211:
+		board = rule211(board)
+	elif rule_num == 212:
+		board = rule212(board)
+	elif rule_num == 213:
+		board = rule213(board)
+	elif rule_num == 214:
+		board = rule214(board)
+	elif rule_num == 215:
+		board = rule215(board)
+	elif rule_num == 216:
+		board = rule216(board)
+	elif rule_num == 217:
+		board = rule217(board)
+	elif rule_num == 218:
+		board = rule218(board)
+	elif rule_num == 219:
+		board = rule219(board)
+	elif rule_num == 220:
+		board = rule220(board)
+	elif rule_num == 221:
+		board = rule221(board)
+	elif rule_num == 222:
+		board = rule222(board)
+	elif rule_num == 223:
+		board = rule223(board)
+	elif rule_num == 224:
+		board = rule224(board)
+	elif rule_num == 225:
+		board = rule225(board)
+	elif rule_num == 226:
+		board = rule226(board)
+	elif rule_num == 227:
+		board = rule227(board)
+	elif rule_num == 228:
+		board = rule228(board)
+	elif rule_num == 229:
+		board = rule229(board)
+	elif rule_num == 230:
+		board = rule230(board)
+	elif rule_num == 231:
+		board = rule231(board)
+	elif rule_num == 232:
+		board = rule232(board)
+	elif rule_num == 233:
+		board = rule233(board)
+	elif rule_num == 234:
+		board = rule234(board)
+	elif rule_num == 235:
+		board = rule235(board)
+	elif rule_num == 236:
+		board = rule236(board)
+	elif rule_num == 237:
+		board = rule237(board)
+	elif rule_num == 238:
+		board = rule238(board)
+	elif rule_num == 239:
+		board = rule239(board)
+	elif rule_num == 240:
+		board = rule240(board)
+	elif rule_num == 241:
+		board = rule241(board)
+	elif rule_num == 242:
+		board = rule242(board)
+	elif rule_num == 243:
+		board = rule243(board)
+	elif rule_num == 244:
+		board = rule244(board)
+	elif rule_num == 245:
+		board = rule245(board)
+	elif rule_num == 246:
+		board = rule246(board)
+	elif rule_num == 247:
+		board = rule247(board)
+	elif rule_num == 248:
+		board = rule248(board)
+	elif rule_num == 249:
+		board = rule249(board)
+	elif rule_num == 250:
+		board = rule250(board)
+	elif rule_num == 251:
+		board = rule251(board)
+	elif rule_num == 252:
+		board = rule252(board)
+	elif rule_num == 253:
+		board = rule253(board)
+	elif rule_num == 254:
+		board = rule254(board)
+	elif rule_num == 255:
+		board = rule255(board)
 
-	SumVert = np.sum(Table, axis=0)# Width
-	SumHori = np.sum(Table, axis=1)# ~Time
+	board = board.astype(int)
+	sum_vert = np.sum(board, axis=0)# width
+	sum_hori = np.sum(board, axis=1)# height ~time
 
-	if Plot == True:
-		plt.figure(figsize=FgSz1)
-		plt.title('Rule '+str(RuleN))
-		plt.imshow(Table, cmap = 'binary')
-		if type(SavePath) != type(None):
-			name = SavePath+'rule'+str(RuleN)+'_sz'+str(Shape[0])
-			name = name+'-'+str(Shape[0])
-			if (Start == 'center')|(type(Seed) == None):
+	if plot == True:
+		plt.figure(figsize=fig_sz1)
+		plt.title('Rule '+str(rule_num))
+		plt.imshow(board, cmap = 'binary')
+		if type(save_path) != type(None):
+			name = save_path+'rule'+str(rule_num)+'_sz'+str(shape[0])
+			name = name+'-'+str(shape[0])
+			if (start == 'center')|(type(seed) == None):
 				name = name+'_simpl'
-			elif (Start == 'bin_w')|(type(Seed) == None):
+			elif (start == 'bin_w')|(type(seed) == None):
 				name = name+'_bin_w'
-			elif (Start == 'bin_k')|(type(Seed) == None):
+			elif (start == 'bin_k')|(type(seed) == None):
 				name = name+'_bin_k'
-			elif (Start == 'rand')|(type(Seed) == None):
+			elif (start == 'rand')|(type(seed) == None):
 				name = name+'_rand'
-			elif type(Seed) != None:
+			elif type(seed) != None:
 				name = name+'_self'
 
 			plt.savefig(name, bbox_inches='tight')
 		plt.show()
 
-		plt.figure(figsize=FgSz2)
+		plt.figure(figsize=fig_sz2)
 		plt.subplot(2, 1, 1)
-		plt.title('Rule '+str(RuleN))
+		plt.title('Rule '+str(rule_num))
 		plt.grid(True)
-		plt.plot(SumVert)
+		plt.plot(sum_vert)
 		plt.xlabel('Lines')
 		plt.ylabel("Sum over the columns")
 		plt.subplot(2, 1, 2)
-		plt.title('Rule '+str(RuleN))
+		plt.title('Rule '+str(rule_num))
 		plt.grid(True)
-		plt.plot(SumHori)
+		plt.plot(sum_hori)
 		plt.xlabel('Columns')
 		plt.ylabel('Sum over the lines')
-		if type(SavePath) != type(None):
-			name = SavePath+'rule'+str(RuleN)+'_sz'+str(Shape[0])
-			name = name+'-'+str(Shape[0])
-			if (Start == 'center')|(type(Seed) == None):
+		if type(save_path) != type(None):
+			name = save_path+'rule'+str(rule_num)+'_sz'+str(shape[0])
+			name = name+'-'+str(shape[0])
+			if (start == 'center')|(type(seed) == None):
 				name = name+'_simpl.png'
-			elif (Start == 'bin_w')|(type(Seed) == None):
+			elif (start == 'bin_w')|(type(seed) == None):
 				name = name+'_bin_w.png'
-			elif (Start == 'bin_k')|(type(Seed) == None):
+			elif (start == 'bin_k')|(type(seed) == None):
 				name = name+'_bin_k.png'
-			elif (Start == 'rand')|(type(Seed) == None):
+			elif (start == 'rand')|(type(seed) == None):
 				name = name+'_rand.png'
-			elif type(Seed) != None:
+			elif type(seed) != None:
 				name = name+'_self.png'
 				
 			plt.savefig(name, bbox_inches='tight')
+
 		plt.show()
 
-	return Table, SumVert, SumHori
+	return board, sum_vert, sum_hori

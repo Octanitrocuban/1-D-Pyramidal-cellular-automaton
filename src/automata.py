@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Matthieu Nougaret
-
 This moule contain the main function to use to compute the cellular automaton
 """
 import numpy as np

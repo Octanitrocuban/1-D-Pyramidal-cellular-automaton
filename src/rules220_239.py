@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Matthieu Nougaret
-
 This module contain the function to use from 1200 to 239-th rule.
 """
 import numpy as np

@@ -8,7 +8,7 @@ All of the 256 rules were implemented. To not having an overloaded file, the rul
 The list of script and their purpose:
 * automata.py:
   * ApplicationRules: Function to applied one of the 256 possible rules.
-* rules0_19.py, rules20_39.py, rules40_59.py rules60_79.py, rules80_99.py, rules100_119.py, rules120_139.py, rules140_159.py, rules160_179.py, rules180_199.py, rules200_219.py, rules220_239.py, rules240_255.py: the 256 different rules that can be applied.
+* rules0_99.py, rules100_199.py, rules200_255.py, rules220_239.py, rules240_255.py: contains the 256 different rules that can be applied.
 
 Here are some exemple of what you can have with different rules.
 
